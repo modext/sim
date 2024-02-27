@@ -1,5 +1,4 @@
-# Use an official Node.js image as a base image
-FROM node:16
+FROM node:18
 
 WORKDIR /app
 

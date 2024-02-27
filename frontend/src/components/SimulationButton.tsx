@@ -29,12 +29,10 @@ const orders = [
   },
 ];
 
-// Calculate total commissions for the staff member
 const calculateCommissions = (orders: any[]) => {
   const commissionPlan = {
     Basketball: 10, // 10% commission for Basketball
     Football: 5,    // 5% commission for Football
-    // Add commission percentages for other products
   };
 
   const dailyCommissions: { day: string; ordersCount: number; totalCommissions: number }[] = [];
@@ -62,7 +60,7 @@ const calculateCommissions = (orders: any[]) => {
   return dailyCommissions;
 };
 
-const SimulationButton: React.FC = () => {
+const Simulation: React.FC = () => {
   const [simulationData, setSimulationData] = useState<any>(null); // You may need to adjust the type according to your simulation data structure
 
   const handleSimulationClick = async () => {
@@ -98,4 +96,4 @@ const SimulationButton: React.FC = () => {
   );
 };
 
-export default SimulationButton;
+export default Button;

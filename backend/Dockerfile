@@ -36,7 +36,7 @@ RUN npm install || yarn install
 COPY . .
 
 # Use tsc to compile your TypeScript to JavaScript
-# RUN npx tsc
+RUN npx tsc
 RUN npm run build
 # Your application will bind to port 3000, so use the EXPOSE instruction to have it mapped by the docker daemon
 EXPOSE 3000

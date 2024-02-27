@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-// components/ProductTable.tsx
+
 "use client"
 import React from "react";
 import { DataTable, TextField } from "@shopify/polaris";
@@ -26,7 +26,6 @@ const ProductTable: React.FC = () => {
             "$20",
             <TextField type="number" autoComplete="yes" label />,
           ],
-          // Add more rows for other products
         ]}
       />
     </div>
