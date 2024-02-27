@@ -20,7 +20,7 @@
 # CMD ["npm", "start"]
 
 # Use the official Node.js 14 image as a base image
-FROM node:14
+FROM node:16
 
 # Set the working directory within the container to /app
 WORKDIR /app

@@ -28,7 +28,7 @@ export const simulateCommissions = async (req: Request, res: Response) => {
         },
       },
       include: {
-        product: {
+        Product: {
           include: {
             commissions: true,
           },
@@ -37,11 +37,14 @@ export const simulateCommissions = async (req: Request, res: Response) => {
     });
 
     const totalCommission = orders.reduce((acc, order) => {
-      const commission =
-        order.product.commissions[order.product.commissions.length - 1]; // Get the last commission as an example
-      const commissionPercent = commission ? commission.percent : 0;
-      const commissionAmount = (order.product.price * commissionPercent) / 100;
-      return acc + commissionAmount * order.quantity;
+      if (order.Product.commissions && order.Product.commissions.length > 0) {
+        const lastCommission = order.Product.commissions[order.Product.commissions.length - 1];
+        const commissionPercent = lastCommission.percent;
+        const commissionAmount = (order.Product.price * commissionPercent) / 100;
+        return acc + commissionAmount * order.quantity;
+      } else {
+        return acc;
+      }
     }, 0);
 
     res.json({ totalCommission });
