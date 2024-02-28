@@ -1,29 +1,37 @@
 import Order from '../models/order';
 import StaffMember from '../models/staffMembers';
 import Product from '../models/product';
+import mongoose from 'mongoose';
 
 export const seedOrders = async () => {
   try {
-    // Find staff members and products in the database
-    const staffMember1 = await StaffMember.findOne({ name: 'Staff Member 1' }); // Replace 'Staff Member 1' with the actual name
-    const staffMember2 = await StaffMember.findOne({ name: 'Staff Member 2' }); // Replace 'Staff Member 2' with the actual name
-    const basketballProduct = await Product.findOne({ name: 'Basketball' }); // Replace 'Basketball' with the actual product name
-    const footballProduct = await Product.findOne({ name: 'Football' }); // Replace 'Football' with the actual product name
+    await mongoose.connect('//localhost:27017'); 
 
-    // Ensure staff members and products are found
-    if (!staffMember1 || !staffMember2 || !basketballProduct || !footballProduct) {
-      console.error('Staff member or product not found');
+    const ordersCount = await Order.countDocuments();
+    if (ordersCount > 0) {
+      console.log('Orders already seeded');
       return;
     }
 
-    // Seed orders
+    const staffMember1 = await StaffMember.findOneAndUpdate({ name: 'Staff Member 1' }, {}, { upsert: true, new: true });
+    const staffMember2 = await StaffMember.findOneAndUpdate({ name: 'Staff Member 2' }, {}, { upsert: true, new: true });
+    const basketballProduct = await Product.findOneAndUpdate({ name: 'Basketball', commissionPercentage: 10 }, {}, { upsert: true, new: true });
+    const footballProduct = await Product.findOneAndUpdate({ name: 'Football', commissionPercentage: 5 }, {}, { upsert: true, new: true });
+
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+
     await Order.insertMany([
-      { staffMember: staffMember1._id, products: [{ product: basketballProduct._id, quantity: 1 }] },
-      { staffMember: staffMember2._id, products: [{ product: footballProduct._id, quantity: 1 }] },
-      // Add more sample orders as needed
+      { staffMember: staffMember1._id, products: [{ product: basketballProduct._id, quantity: 1 }], date: today },
+      { staffMember: staffMember2._id, products: [{ product: footballProduct._id, quantity: 2 }], date: yesterday },
     ]);
     console.log('Orders seeded successfully');
   } catch (err) {
     console.error('Error seeding orders:', err);
+  } finally {
+    mongoose.disconnect();
   }
 };
+
+seedOrders();

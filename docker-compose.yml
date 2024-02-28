@@ -14,5 +14,14 @@ services:
       - mongodb
     environment:
       - MONGODB_URI=mongodb://mongodb:27017/Simulator
+  seed:
+    build: ./backend
+    depends_on:
+      - mongodb
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/Simulator
+    command: npm run seed
+    volumes:
+      - ./backend:/app
 volumes:
   mongodb_data:

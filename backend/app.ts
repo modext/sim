@@ -4,6 +4,7 @@ import orderRoutes from './src/routes/orderRoutes';
 import staffMemberRoutes from './src/routes/staffMemberRoutes';
 import { connectDB } from './config/database';
 import commissionPlanRoutes from './src/routes/commissionPlanRoutes';
+import cors from 'cors';
 
 const app = express();
 
@@ -13,6 +14,9 @@ connectDB();
 // Middleware
 app.use(express.json());
 
+app.use(cors({
+  origin: 'http://localhost:8000', 
+}));
 
 // Routes
 app.use('/products', productRoutes);

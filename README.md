@@ -2,8 +2,8 @@
  ## Tech Stack
 1. Frontend: Next.js, Shopify Polaris for UI components
 2. Backend: Node.js with Express
-3. Database: PostgreSQL
-4. ORM: Prisma
+3. Database: MongoDb
+4. ORM: Mongoose
 5. Containerization: Docker and Docker Compose for easy deployment and development environment setup
 ## Prerequisites
 Install Node.js (12.x or higher)
@@ -16,19 +16,18 @@ Install Docker and Docker Compose
 cd backend
 cp .env.example .env
 
-## Start PostgreSQL Database
-  docker-compose up -d db
-## Install Dependencies & Run Backend
-cd backend
-npm install
-npx prisma migrate dev
-npm run dev
-
 ## Install Dependencies & Run Frontend
 cd frontend
 npm install
 npm run dev
-## Running with Docker 
-Make sure Docker is running on your machine.
-From the project root directory, run:
-docker-compose up
+
+## Install Dependencies & Run Backend
+cd backend
+npm install
+
+## Start Database
+  docker-compose up --build
+
+ # Access Application
+Frontend: http://localhost:8000
+Backend API: http://localhost:5001 
