@@ -7,7 +7,7 @@ import { DataTable, TextField } from "@shopify/polaris";
 const ProductTable: React.FC = () => {
   return (
     <div>
-      <h2>Product Table</h2>
+      <h2>Products</h2>
       <DataTable
         columnContentTypes={["text", "text", "numeric", "numeric"]}
         headings={["Product name", "Category", "Price", "Commission percent"]}
