@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Card, Select, DataTable, Button, DatePicker } from "@shopify/polaris";
+import {
+  Card,
+  Select,
+  DataTable,
+  Button,
+  Text,
+  DatePicker,
+} from "@shopify/polaris";
 import axios from "axios";
 import routes from "../../lib/routes";
 import DateRangePicker from "../../lib/bundles/DateRangePicker";
@@ -35,8 +42,10 @@ const CommissionSimulationComponent: React.FC = () => {
   >([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const getSelectedStaffMemberLabel = () => {
-    const selectedMember = staffMembers.find((member) => member.value === selectedStaffMember);
-    return selectedMember ? selectedMember.label : '';
+    const selectedMember = staffMembers.find(
+      (member) => member.value === selectedStaffMember
+    );
+    return selectedMember ? selectedMember.label : "";
   };
 
   useEffect(() => {
@@ -114,10 +123,12 @@ const CommissionSimulationComponent: React.FC = () => {
         <Select
           label="Staff Member"
           options={staffMembers}
-          onChange={setSelectedStaffMember}
+          onChange={(value) => setSelectedStaffMember(value)}
           value={selectedStaffMember}
         />
-        <p>{getSelectedStaffMemberLabel()}</p>
+        <Text variant="heading2xl" as="h3">
+          {getSelectedStaffMemberLabel()}{" "}
+        </Text>
       </div>
       <Button onClick={simulateCommissions} loading={isLoading}>
         Simulate Commissions
