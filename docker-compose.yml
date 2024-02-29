@@ -20,6 +20,7 @@ services:
       - mongodb
     environment:
       - MONGODB_URI=mongodb://mongodb:27017/Simulator
+    # entrypoint: ["/usr/src/app/wait-for-it.sh", "mongodb:27017", "--"]
     command: npm run seed
     volumes:
       - ./backend:/app

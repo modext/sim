@@ -34,6 +34,10 @@ const CommissionSimulationComponent: React.FC = () => {
     Array<Array<string | number>>
   >([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const getSelectedStaffMemberLabel = () => {
+    const selectedMember = staffMembers.find((member) => member.value === selectedStaffMember);
+    return selectedMember ? selectedMember.label : '';
+  };
 
   useEffect(() => {
     const fetchStaffMembers = async () => {
@@ -113,6 +117,7 @@ const CommissionSimulationComponent: React.FC = () => {
           onChange={setSelectedStaffMember}
           value={selectedStaffMember}
         />
+        <p>{getSelectedStaffMemberLabel()}</p>
       </div>
       <Button onClick={simulateCommissions} loading={isLoading}>
         Simulate Commissions
